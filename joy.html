@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            background: #fff;
+            color: #333;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        #student-info {
+            width: 50%;
+            margin: auto;
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #student-info table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #student-info th,
+        #student-info td {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+
+        #passport-image {
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
+            float: right;
+        }
+
+        #passport-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        #color-preferences {
+            clear: both;
+            margin-top: 20px;
+        }
+
+        .color-button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        #brown-button {
+            background-color: #A52A2A;
+            color: #fff;
+        }
+
+        #grey-button {
+            background-color: #808080;
+            color: #fff;
+        }
+
+        #white-button {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Student Information</h1>
+    </header>
+    <div id="student-info">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td>JOYCE MURUGI</td>
+            </tr>
+            <tr>
+                <td>Registration Number:</td>
+                <td>Sct222-0141/2021</td>
+            </tr>
+        </table>
+        <div id="color-preferences">
+            <p>Click the buttons below to set your favorite background color:</p>
+            <button id="brown-button" class="color-button" type="button" onclick="setColorPreference('pink')">Pink</button>
+            <button id="grey-button" class="color-button" type="button" onclick="setColorPreference('blue')">Blue</button>
+            <button id="white-button" class="color-button" type="button" onclick="setColorPreference('white')">White</button>
+        </div>
+    </div>
+    <div id="passport-image">
+        <img src="joy.jpg" alt="My Picture">
+    </div>
+</body>
+
+<script>
+    const localStorage = window.localStorage;
+
+    const updateDOM = () => {
+        const storedPreferences = localStorage.getItem("preference");
+        const preference = storedPreferences ? JSON.parse(storedPreferences) : {};
+        document.body.style.background = preference.color || "#fff";
+    };
+
+    const setColorPreference = (color) => {
+        const preference = {
+            color
+        };
+        localStorage.setItem("preference", JSON.stringify(preference));
+        updateDOM();
+    };
+    updateDOM();
+</script>
+
+</html>
